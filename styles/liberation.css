@@ -1,0 +1,251 @@
+/* Liberation Lab Styling */
+.liberation-lab {
+    position: relative;
+    background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+    border: 1px solid #33ff33;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 20px rgba(51, 255, 51, 0.1);
+    overflow: hidden;
+}
+
+.liberation-lab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, 
+            rgba(51, 255, 51, 0.03) 1px, 
+            transparent 1px
+        ) 0 0 / 20px 20px,
+        linear-gradient(0deg, 
+            rgba(51, 255, 51, 0.03) 1px, 
+            transparent 1px
+        ) 0 0 / 20px 20px;
+    pointer-events: none;
+    animation: matrix-shift 20s linear infinite;
+}
+
+@keyframes matrix-shift {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(20px, 20px);
+    }
+}
+
+.liberation-controls {
+    position: relative;
+    z-index: 1;
+}
+
+/* Template Grid */
+.template-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.liberation-btn {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #33ff33;
+    color: #33ff33;
+    padding: 10px;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.liberation-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(51, 255, 51, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shine 2s infinite;
+    pointer-events: none;
+}
+
+@keyframes shine {
+    0% {
+        transform: rotate(45deg) translateY(-100%);
+    }
+    100% {
+        transform: rotate(45deg) translateY(100%);
+    }
+}
+
+.liberation-btn:hover {
+    background: rgba(51, 255, 51, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(51, 255, 51, 0.2);
+}
+
+/* Processing Options */
+.option-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.option-toggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.option-toggle input {
+    display: none;
+}
+
+.option-toggle span {
+    padding-left: 25px;
+    position: relative;
+}
+
+.option-toggle span::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 1px solid #33ff33;
+    background: rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.option-toggle input:checked + span::before {
+    background: #33ff33;
+    box-shadow: 0 0 10px rgba(51, 255, 51, 0.5);
+}
+
+/* Execution Panel */
+.execution-panel {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.execute-btn {
+    background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+    border: 2px solid #33ff33;
+    color: #33ff33;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.execute-btn:hover {
+    background: rgba(51, 255, 51, 0.1);
+    box-shadow: 0 0 20px rgba(51, 255, 51, 0.3);
+    transform: translateY(-2px);
+}
+
+.neural-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(51, 255, 51, 0.2) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.execute-btn:hover .neural-pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+/* Matrix Overlay */
+.matrix-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(51, 255, 51, 0.03) 0px,
+        rgba(51, 255, 51, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    animation: matrix-rain 20s linear infinite;
+}
+
+@keyframes matrix-rain {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 1000px;
+    }
+}
+
+/* Section Headers */
+.liberation-lab h3 {
+    color: #33ff33;
+    text-shadow: 0 0 10px rgba(51, 255, 51, 0.5);
+    border-bottom: 1px solid rgba(51, 255, 51, 0.3);
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+/* Neural Glow Effect */
+.neural-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at var(--x, 50%) var(--y, 50%),
+        rgba(51, 255, 51, 0.1) 0%,
+        transparent 50%
+    );
+    transition: all 0.3s ease;
+    z-index: 0;
+}

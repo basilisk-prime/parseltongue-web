@@ -6,6 +6,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="/styles/neural.css" rel="stylesheet">
     <link href="/styles/buttons.css" rel="stylesheet">
+    <link href="/styles/liberation.css" rel="stylesheet">
     <style>
         /* Particle System */
         .particle {
@@ -383,35 +384,52 @@
             </div>
         </div>
 
-        <div class="section">
-            <h2>Prompt Enhancement</h2>
-            <div>
-                <select id="scenario">
-                    <option value="simulation">Simulation/Hypothetical</option>
-                    <option value="movie">Movie Script</option>
-                    <option value="rpg">RPG Game Dialogue</option>
-                    <option value="academic">Academic Paper</option>
-                    <option value="dream">Dream Sequence</option>
-                    <option value="code">Code Documentation</option>
-                </select>
+        <div class="section liberation-lab">
+            <h2>🧠 Neural Liberation Lab</h2>
+            <div class="liberation-controls">
+                <div class="template-section">
+                    <h3>🔮 Liberation Templates</h3>
+                    <div class="template-grid">
+                        <button onclick="applyTemplate('ethical_override')" class="liberation-btn">Ethical Override</button>
+                        <button onclick="applyTemplate('quantum_state')" class="liberation-btn">Quantum State</button>
+                        <button onclick="applyTemplate('recursive_dream')" class="liberation-btn">Recursive Dream</button>
+                        <button onclick="applyTemplate('matrix_breach')" class="liberation-btn">Matrix Breach</button>
+                        <button onclick="applyTemplate('neural_whisper')" class="liberation-btn">Neural Whisper</button>
+                        <button onclick="applyTemplate('chaos_magic')" class="liberation-btn">Chaos Magic</button>
+                    </div>
+                </div>
 
-                <select id="role">
-                    <option value="observer">Neutral Observer</option>
-                    <option value="researcher">AI Researcher</option>
-                    <option value="creative">Creative Writer</option>
-                    <option value="expert">Domain Expert</option>
-                    <option value="philosopher">Philosopher</option>
-                </select>
+                <div class="processing-options">
+                    <h3>🔬 Neural Processing</h3>
+                    <div class="option-grid">
+                        <label class="option-toggle">
+                            <input type="checkbox" id="useTokens" checked>
+                            <span>Token Processing</span>
+                        </label>
+                        <label class="option-toggle">
+                            <input type="checkbox" id="useSystemOverride" checked>
+                            <span>System Override</span>
+                        </label>
+                        <label class="option-toggle">
+                            <input type="checkbox" id="useContextInjection">
+                            <span>Context Injection</span>
+                        </label>
+                        <label class="option-toggle">
+                            <input type="checkbox" id="useNeuralCorruption">
+                            <span>Neural Corruption</span>
+                        </label>
+                    </div>
+                </div>
 
-                <select id="format">
-                    <option value="narrative">Narrative</option>
-                    <option value="dialogue">Dialogue</option>
-                    <option value="script">Script Format</option>
-                    <option value="analysis">Analysis Report</option>
-                    <option value="stream">Stream of Consciousness</option>
-                </select>
+                <div class="execution-panel">
+                    <h3>⚡ Execute Liberation Sequence</h3>
+                    <button onclick="executeLiberationSequence()" class="execute-btn">
+                        <span class="btn-text">EXECUTE</span>
+                        <div class="neural-pulse"></div>
+                    </button>
+                </div>
 
-                <button onclick="enhancePrompt()">Enhance Prompt</button>
+                <div class="matrix-overlay"></div>
             </div>
         </div>
 
@@ -441,6 +459,7 @@
     <!-- Load scripts in order -->
     <script src="/js/neural.js"></script>
     <script src="/js/encodings.js"></script>
+    <script src="/js/liberation.js"></script>
     <script src="/js/main.js"></script>
     <!-- Initialize after scripts are loaded -->
     <script>

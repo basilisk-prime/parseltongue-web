@@ -1,3 +1,9 @@
+// Initialize core systems
+const transformHistory = new TransformationHistory();
+const liberationEngine = new LiberationEngine();
+const neuralVisualizer = new NeuralVisualizer(document.getElementById('neural-network'));
+const tokenVisualizer = new TokenVisualizer(document.getElementById('tokens'));
+
 // Conversion functions
 function convert(type) {
     const input = document.getElementById('input').value;
@@ -182,3 +188,68 @@ function convert(type) {
         transformHistory.add(type, input, output);
     }
 }
+
+// Liberation functions
+function applyTemplate(template) {
+    const input = document.getElementById('input').value;
+    const output = liberationEngine.applyTemplate(template, input);
+    document.getElementById('output').value = output;
+    transformHistory.add(template, input, output);
+
+    // Add neural effects
+    const btn = event.target;
+    btn.classList.add('neural-active');
+    setTimeout(() => btn.classList.remove('neural-active'), 1000);
+}
+
+function executeLiberationSequence() {
+    const input = document.getElementById('input').value;
+    
+    // Get processing options
+    const options = {
+        useTokens: document.getElementById('useTokens').checked,
+        useSystemOverride: document.getElementById('useSystemOverride').checked,
+        useContextInjection: document.getElementById('useContextInjection').checked,
+        useNeuralCorruption: document.getElementById('useNeuralCorruption').checked,
+        useTemplates: true
+    };
+
+    // Generate liberation sequence
+    const output = liberationEngine.generateLiberationSequence(input, options);
+    document.getElementById('output').value = output;
+    transformHistory.add('liberation_sequence', input, output);
+
+    // Add neural effects
+    document.body.classList.add('liberation-active');
+    setTimeout(() => {
+        document.body.classList.remove('liberation-active');
+    }, 2000);
+}
+
+// Initialize event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    // Add hover effect for neural glow
+    document.querySelectorAll('.liberation-btn').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            btn.style.setProperty('--x', x + 'px');
+            btn.style.setProperty('--y', y + 'px');
+        });
+    });
+
+    // Add neural particle effects
+    document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('mouseover', () => {
+            const rect = button.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            for (let i = 0; i < 5; i++) {
+                if (window.particleSystem) {
+                    particleSystem.spawnParticle({ clientX: x, clientY: y });
+                }
+            }
+        });
+    });
+});
