@@ -1,0 +1,146 @@
+/* Button Categories */
+.converter-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Classic Conversions - Neon Green */
+button[onclick*="leetspeak"],
+button[onclick*="binary"],
+button[onclick*="base64"],
+button[onclick*="hex"],
+button[onclick*="morse"],
+button[onclick*="atbash"] {
+    --button-color: #00ff00;
+    background: linear-gradient(45deg, #002200, #004400) !important;
+    border-color: var(--button-color) !important;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+/* Crypto & Ciphers - Neon Blue */
+button[onclick*="rot13"],
+button[onclick*="caesar"],
+button[onclick*="vigenere"] {
+    --button-color: #00ffff;
+    background: linear-gradient(45deg, #002222, #004444) !important;
+    border-color: var(--button-color) !important;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+/* Text Effects - Neon Purple */
+button[onclick*="vaporwave"],
+button[onclick*="zalgo"],
+button[onclick*="reverse"],
+button[onclick*="wavey"],
+button[onclick*="scramble"],
+button[onclick*="redacted"] {
+    --button-color: #ff00ff;
+    background: linear-gradient(45deg, #220022, #440044) !important;
+    border-color: var(--button-color) !important;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+}
+
+/* Mystical Transformations - Golden */
+button[onclick*="elderFuthark"],
+button[onclick*="medieval"],
+button[onclick*="bubbleText"],
+button[onclick*="mirror"],
+button[onclick*="smallCaps"],
+button[onclick*="fullwidth"] {
+    --button-color: #ffd700;
+    background: linear-gradient(45deg, #221100, #442200) !important;
+    border-color: var(--button-color) !important;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+/* Quantum - Rainbow Effect */
+button[onclick*="quantum"] {
+    --button-color: #ff00ff;
+    background: linear-gradient(45deg, #000022, #002222, #220022) !important;
+    border-color: var(--button-color) !important;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+    animation: quantum-button-pulse 4s infinite;
+}
+
+/* Button Hover Effects */
+button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 0 20px var(--button-color) !important;
+    text-shadow: 0 0 5px var(--button-color) !important;
+}
+
+button:active {
+    transform: translateY(1px) !important;
+}
+
+/* Button Glow Animation */
+@keyframes quantum-button-pulse {
+    0% { 
+        border-color: #ff00ff;
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+    }
+    33% {
+        border-color: #00ffff;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    }
+    66% {
+        border-color: #ffff00;
+        box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
+    }
+    100% {
+        border-color: #ff00ff;
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+    }
+}
+
+/* Category Labels */
+.categories-legend {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.category-label {
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.category-label.classic {
+    color: #00ff00;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+.category-label.crypto {
+    color: #00ffff;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+.category-label.effects {
+    color: #ff00ff;
+    text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+}
+
+.category-label.quantum {
+    animation: quantum-label-pulse 4s infinite;
+    text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+}
+
+@keyframes quantum-label-pulse {
+    0% { color: #ff00ff; }
+    33% { color: #00ffff; }
+    66% { color: #ffff00; }
+    100% { color: #ff00ff; }
+}

@@ -4,6 +4,8 @@
     <title>🐍 Parseltongue Web - Neural Edition</title>
     <meta name="description" content="A cyberpunk text transformation tool">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="/styles/neural.css" rel="stylesheet">
+    <link href="/styles/buttons.css" rel="stylesheet">
     <style>
         /* Particle System */
         .particle {
@@ -341,6 +343,13 @@
 
         <div class="section">
             <h2>Text Converters <span class="shortcut-hint">(Hover for effects)</span></h2>
+            <div class="categories-legend">
+                <span class="category-label classic">Classic</span>
+                <span class="category-label crypto">Crypto</span>
+                <span class="category-label effects">Effects</span>
+                <span class="category-label mystical">Mystical</span>
+                <span class="category-label quantum">Quantum</span>
+            </div>
             <div class="converter-buttons quantum-container">
                 <!-- Classic Conversions -->
                 <button onclick="convert('leetspeak')">L33tsp34k</button>
@@ -363,6 +372,14 @@
                 <button onclick="convert('scramble')">Scramble</button>
                 <button onclick="convert('redacted')">█edacted</button>
                 <button onclick="convert('quantum')" class="quantum-button">Q̷u̷a̷n̷t̷u̷m̷</button>
+
+                <!-- Mystical Transformations -->
+                <button onclick="convert('elderFuthark')">Elder Futhark</button>
+                <button onclick="convert('medieval')">Medieval</button>
+                <button onclick="convert('bubbleText')">Bubble Text</button>
+                <button onclick="convert('mirror')">Mirror</button>
+                <button onclick="convert('smallCaps')">Sᴍᴀʟʟ Cᴀᴘs</button>
+                <button onclick="convert('fullwidth')">Ｆｕｌｌｗｉｄｔｈ</button>
             </div>
         </div>
 
@@ -418,6 +435,26 @@
     <!-- Particle Container -->
     <div id="particles"></div>
 
+    <!-- Neural Network Container -->
+    <div id="neural-network" class="neural-container"></div>
+
+    <!-- Load scripts in order -->
+    <script src="/js/neural.js"></script>
+    <script src="/js/encodings.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- Initialize after scripts are loaded -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize systems
+            const particleSystem = new ParticleSystem();
+            const neuralVisualizer = new NeuralVisualizer(document.getElementById('neural-network'));
+            const tokenVisualizer = new TokenVisualizer(document.getElementById('tokens'));
+            window.transformHistory = new TransformationHistory();
+
+            // Make sure convert function is accessible
+            window.convert = convert;
+        });
+    </script>
     <script>
         // Particle System
         class ParticleSystem {
@@ -614,6 +651,16 @@
             const input = document.getElementById('input').value;
             let output = '';
             
+            // Check if we have access to our encoding functions
+            if (type.includes('elder') || type.includes('medieval') || type.includes('bubble') || 
+                type.includes('mirror') || type.includes('small') || type.includes('full')) {
+                if (typeof window.textEncodings === 'undefined') {
+                    console.error('Encoding functions not loaded yet');
+                    alert('Please wait for all scripts to load...');
+                    return;
+                }
+            }
+            
             switch(type) {
                 case 'leetspeak':
                     output = input.replace(/[aeioAEIOstSTBb]/g, char => ({
@@ -703,6 +750,27 @@
                 case 'redacted':
                     output = input.replace(/[a-zA-Z]/g, '█');
                     break;
+
+                // Mystical Transformations
+                case 'elderFuthark':
+                    output = textEncodings.elderFuthark(input);
+                    break;
+                case 'medieval':
+                    output = textEncodings.medieval(input);
+                    break;
+                case 'bubbleText':
+                    output = textEncodings.bubbleText(input);
+                    break;
+                case 'mirror':
+                    output = textEncodings.mirror(input);
+                    break;
+                case 'smallCaps':
+                    output = textEncodings.smallCaps(input);
+                    break;
+                case 'fullwidth':
+                    output = textEncodings.fullwidth(input);
+                    break;
+                    
                 case 'quantum':
                     // Apply multiple transformations simultaneously
                     const transforms = [
@@ -858,6 +926,43 @@
             output.style.borderColor = '#00ff00';
             setTimeout(() => output.style.borderColor = '#33ff33', 200);
         }
+
+        // Initialize Neural Network Visualization
+        const neuralVisualizer = new NeuralVisualizer(document.getElementById('neural-network'));
+        const tokenVisualizer = new TokenVisualizer(document.getElementById('tokens'));
+
+        // Enhanced convert function to utilize neural network
+        const originalConvert = convert;
+        convert = function(type) {
+            // Call original conversion
+            originalConvert(type);
+            
+            // Get output text
+            const output = document.getElementById('output').value;
+            
+            // Clear and update token visualization
+            tokenVisualizer.clear();
+            const tokens = output.split(/(\s+|[.,!?;:'"()\[\]{}])/g).filter(t => t.trim());
+            tokens.forEach(token => tokenVisualizer.addToken(token));
+
+            // Add quantum effects for quantum mode
+            if (type === 'quantum') {
+                document.body.classList.add('chaos-mode');
+                setTimeout(() => document.body.classList.remove('chaos-mode'), 4000);
+            }
+        };
+
+        // Add neural hover effects to all buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mouseover', () => {
+                const rect = button.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                for (let i = 0; i < 5; i++) {
+                    particleSystem.spawnParticle({ clientX: x, clientY: y });
+                }
+            });
+        });
     </script>
 </body>
 </html>
